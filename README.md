@@ -122,3 +122,5 @@ DrinkStockは、在庫管理と飲酒記録を一体化しており、
 
 - Web Push通知（Web Push API + Service Worker）
 
+### 画面遷移図
+Figma : https://www.figma.com/design/u8bzdKIgeWa40vwnk4o5Ri/durink_stock-MVP-?node-id=0-1&t=Yl0RQUsOq2rjl2E8-1
