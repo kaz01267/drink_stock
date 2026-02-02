@@ -124,3 +124,9 @@ DrinkStockは、在庫管理と飲酒記録を一体化しており、
 
 ### 画面遷移図
 Figma : https://www.figma.com/design/u8bzdKIgeWa40vwnk4o5Ri/durink_stock-MVP-?node-id=0-1&t=Yl0RQUsOq2rjl2E8-1
+<<<<<<< HEAD
+=======
+
+### ER図
+[![Image from Gyazo](https://i.gyazo.com/5a57fc56b4b8afa525bd76607125fb39.png)](https://gyazo.com/5a57fc56b4b8afa525bd76607125fb39)
+>>>>>>> d00b690 (ER図の追加)
