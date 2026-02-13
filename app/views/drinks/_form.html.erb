@@ -1,0 +1,23 @@
+<%= form_with model: drink do |f| %>
+  <% if drink.errors.any? %>
+    <ul>
+      <% drink.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div>
+    <%= f.label :name, "お酒の名前" %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :stock_ml, "在庫(ml)" %><br>
+    <%= f.number_field :stock_ml, min: 0 %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>
