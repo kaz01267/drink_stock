@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
+  get "drinks/index"
+  get "drinks/new"
+  get "drinks/create"
+  get "drinks/edit"
+  get "drinks/update"
+  get "drinks/destroy"
   # get "pages/account"
   get "account", to: "pages#account"
   devise_for :users
-  resources :drinks, only: %i[index new create edit update destroy]
+  resources :drinks
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
