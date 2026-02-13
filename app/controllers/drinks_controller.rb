@@ -31,7 +31,7 @@ class DrinksController < ApplicationController
 
   def destroy
     @drink.destroy
-    redirect_to drinks_path, notice: "お酒を削除しました", status: :see_other
+    redirect_to drinks_path, notice: "お酒を削除しました"
   end
 
   private
