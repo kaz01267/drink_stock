@@ -1,0 +1,25 @@
+<h1>在庫一覧</h1>
+
+<p><%= link_to "お酒を登録する", new_drink_path %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>お酒</th>
+      <th>在庫(ml)</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @drinks.each do |drink| %>
+      <tr>
+        <td><%= drink.name %></td>
+        <td><%= drink.stock_ml %></td>
+        <td>
+          <%= link_to "編集", edit_drink_path(drink) %>
+          <%= button_to "削除", drink_path(drink), method: :delete, data: { turbo_confirm: "削除しますか？" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
