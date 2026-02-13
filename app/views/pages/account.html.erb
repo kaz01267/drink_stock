@@ -1,0 +1,11 @@
+<h1>アカウント</h1>
+
+<% if user_signed_in? %>
+  <p>ログイン中: <%= current_user.email %></p>
+  <%#= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+<% else %>
+  <p>ログインしていません</p>
+  <p><a href="/users/sign_in">ログイン</a></p>
+<% end %>
+
+<p><a href="/index.html">トップへ戻る</a></p>
