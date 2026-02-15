@@ -17,7 +17,18 @@
         <td><%= drink.stock_ml %></td>
         <td>
           <%= link_to "編集", edit_drink_path(drink) %>
-          <%= button_to "削除", drink_path(drink), method: :delete, data: { turbo_confirm: "削除しますか？" } %>
+          <%= button_to "削除", drink_path(drink),
+              method: :delete,
+              data: { turbo_confirm: "削除しますか？" } %>
+
+          <% if drink.stock_ml > 0 %>
+           <%= link_to "このお酒を飲んだ", new_drink_drink_record_path(drink) %>
+          <% else %>
+            <span>在庫なし</span>
+            <% end %>
+        </td>
+        <td>
+          <%= link_to "詳細", drink_path(drink) %>
         </td>
       </tr>
     <% end %>

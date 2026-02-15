@@ -1,0 +1,38 @@
+<h1><%= @drink.name %></h1>
+
+<p>現在の在庫：<%= @drink.stock_ml %> ml</p>
+
+<% if @drink.stock_ml > 0 %>
+  <p>
+    <%= link_to "このお酒を飲んだ", new_drink_drink_record_path(@drink) %>
+  </p>
+<% else %>
+  <p>在庫なし</p>
+<% end %>
+
+<hr>
+
+<h2>飲酒履歴</h2>
+
+<% if @drink_records.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>日時</th>
+        <th>飲んだ量(ml)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @drink_records.each do |record| %>
+        <tr>
+          <td><%= record.consumed_at.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= record.consumed_ml %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>まだ飲酒記録はありません</p>
+<% end %>
+
+<p><%= link_to "在庫一覧に戻る", drinks_path %></p>
