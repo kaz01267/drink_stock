@@ -38,7 +38,7 @@ class DrinksController < ApplicationController
     @drink = current_user.drinks.find(params[:id])
     @drink_records = @drink.drink_records.order(consumed_at: :desc)
   end
-  
+
   private
 
   def set_drink
