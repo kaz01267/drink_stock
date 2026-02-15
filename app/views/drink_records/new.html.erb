@@ -1,0 +1,27 @@
+<h1>飲酒記録</h1>
+
+<p>お酒：<%= @drink.name %>（在庫: <%= @drink.stock_ml %> ml）</p>
+
+<%= form_with model: [@drink, @drink_record], local: true do |f| %>
+  <% if @drink_record.errors.any? %>
+    <ul>
+      <% @drink_record.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div>
+    <%= f.label :consumed_ml, "飲んだ量(ml)" %><br>
+    <%= f.number_field :consumed_ml, min: 1, step: 1, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :consumed_at, "飲んだ日時" %><br>
+    <%= f.datetime_select :consumed_at %>
+  </div>
+
+  <%= f.submit "記録する" %>
+<% end %>
+
+<p><%= link_to "在庫一覧に戻る", drinks_path %></p>

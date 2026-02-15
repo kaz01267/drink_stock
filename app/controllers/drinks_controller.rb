@@ -34,6 +34,11 @@ class DrinksController < ApplicationController
     redirect_to drinks_path, notice: "お酒を削除しました"
   end
 
+  def show
+    @drink = current_user.drinks.find(params[:id])
+    @drink_records = @drink.drink_records.order(consumed_at: :desc)
+  end
+  
   private
 
   def set_drink
