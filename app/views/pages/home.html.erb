@@ -1,0 +1,24 @@
+<h1>DrinkStock</h1>
+
+<p>
+  家にあるお酒の在庫管理と飲酒記録をまとめて管理するアプリです。
+</p>
+
+<ul>
+  <li>在庫を登録する</li>
+  <li>飲んだら記録する</li>
+  <li>あとから振り返る</li>
+</ul>
+
+<% unless user_signed_in? %>
+  <p>
+    <%= link_to "ログイン", new_user_session_path %> /
+    <%= link_to "新規登録", new_user_registration_path %>
+  </p>
+<% end %>
+
+<% if user_signed_in? %>
+  <p>
+    <%= link_to "在庫一覧へ", drinks_path %>
+  </p>
+<% end %>
