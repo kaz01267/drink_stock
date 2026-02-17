@@ -10,28 +10,28 @@ class DrinkRecordsController < ApplicationController
 
   def create
     @drink_record = @drink.drink_records.new(drink_record_params.merge(user: current_user))
-  
+
     @drink.with_lock do
       ActiveRecord::Base.transaction do
         consumed  = @drink_record.consumed_ml.to_i
         stock     = @drink.stock_ml.to_i
         new_stock = stock - consumed
-  
+
         if new_stock < 0
           @drink_record.errors.add(:consumed_ml, "が在庫を超えています")
           raise ActiveRecord::RecordInvalid.new(@drink_record)
         end
-  
+
         @drink_record.save!
         @drink.update!(stock_ml: new_stock)
       end
     end
-  
+
     redirect_to drinks_path, notice: "飲酒記録を登録しました"
   rescue ActiveRecord::RecordInvalid
     render :new, status: :unprocessable_entity
   end
-  
+
 
   def edit
   end
