@@ -6,7 +6,13 @@ class DrinkRecord < ApplicationRecord
   validates :consumed_at, presence: true
   validate :stock_is_enough
 
+  before_validation :normalize_consumed_at
+
   private
+
+  def normalize_consumed_at
+    self.consumed_at = Time.zone.parse(consumed_at) if consumed_at.is_a?(String)
+  end
 
   def stock_is_enough
     return if drink.nil? || consumed_ml.nil? || drink.stock_ml.nil?

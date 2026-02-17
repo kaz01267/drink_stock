@@ -1,23 +1,29 @@
-<%= form_with model: drink do |f| %>
-  <% if drink.errors.any? %>
-    <ul>
-      <% drink.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
+<%= form_with model: @drink, local: true do |f| %>
+  <% if @drink.errors.any? %>
+    <div class="alert alert--danger">
+      <ul>
+        <% @drink.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
-  <div>
-    <%= f.label :name, "お酒の名前" %><br>
-    <%= f.text_field :name %>
-  </div>
+  <div class="form">
+    <div class="field">
+      <%= f.label :name, "お酒の名前", class: "field__label" %>
+      <%= f.text_field :name, class: "field__input", placeholder: "例：サッポロ黒ラベル" %>
+    </div>
 
-  <div>
-    <%= f.label :stock_ml, "在庫(ml)" %><br>
-    <%= f.number_field :stock_ml, min: 0 %>
-  </div>
+    <div class="field">
+      <%= f.label :stock_ml, "在庫(ml)", class: "field__label" %>
+      <%= f.number_field :stock_ml, min: 0, step: 1, class: "field__input", placeholder: "例：350" %>
+      <p class="help">0も登録できます（在庫なし表示になります）。</p>
+    </div>
 
-  <div>
-    <%= f.submit %>
+    <div class="actions">
+      <%= f.submit(@drink.persisted? ? "更新する" : "登録する", class: "btn btn--accent") %>
+      <%= link_to "戻る", drinks_path, class: "btn" %>
+    </div>
   </div>
 <% end %>
