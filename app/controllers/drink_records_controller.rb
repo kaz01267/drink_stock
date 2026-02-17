@@ -3,35 +3,35 @@ class DrinkRecordsController < ApplicationController
   before_action :set_drink
   before_action :set_drink_record, only: %i[edit update destroy]
 
+
   def new
     @drink_record = @drink.drink_records.new(consumed_at: Time.current)
   end
 
   def create
     @drink_record = @drink.drink_records.new(drink_record_params.merge(user: current_user))
-
+  
     @drink.with_lock do
       ActiveRecord::Base.transaction do
-        # ★ここに入れる（在庫0はOK、マイナスはNG）
-        new_stock = @drink.stock_ml - @drink_record.consumed_ml
+        consumed  = @drink_record.consumed_ml.to_i
+        stock     = @drink.stock_ml.to_i
+        new_stock = stock - consumed
+  
         if new_stock < 0
           @drink_record.errors.add(:consumed_ml, "が在庫を超えています")
-          raise ActiveRecord::Rollback
+          raise ActiveRecord::RecordInvalid.new(@drink_record)
         end
-
-        @drink_record.save!              # 記録を保存
-        @drink.update!(stock_ml: new_stock) # 在庫を更新（0もOK）
+  
+        @drink_record.save!
+        @drink.update!(stock_ml: new_stock)
       end
     end
-
-    if @drink_record.errors.any?
-      render :new, status: :unprocessable_entity
-    else
-      redirect_to drinks_path, notice: "飲酒記録を登録し、在庫を更新しました"
-    end
+  
+    redirect_to drinks_path, notice: "飲酒記録を登録しました"
   rescue ActiveRecord::RecordInvalid
     render :new, status: :unprocessable_entity
   end
+  
 
   def edit
   end
@@ -71,6 +71,10 @@ class DrinkRecordsController < ApplicationController
     end
 
     redirect_to drink_path(@drink), notice: "飲酒記録を削除しました"
+  end
+
+  def normalize_consumed_at
+    self.consumed_at = Time.zone.parse(consumed_at) if consumed_at.is_a?(String)
   end
 
   private

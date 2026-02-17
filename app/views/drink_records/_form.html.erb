@@ -1,21 +1,31 @@
 <%= form_with model: [drink, drink_record], local: true do |f| %>
   <% if drink_record.errors.any? %>
-    <ul>
-      <% drink_record.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
+    <div class="alert alert--danger">
+      <ul>
+        <% drink_record.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
-  <div>
-    <%= f.label :consumed_ml, "飲んだ量(ml)" %><br>
-    <%= f.number_field :consumed_ml, min: 1, step: 1 %>
-  </div>
+  <div class="form">
+    <div class="field">
+      <%= f.label :consumed_ml, "飲んだ量(ml)", class: "field__label" %>
+      <%= f.number_field :consumed_ml, min: 1, step: 1, class: "field__input" %>
+      <p class="help">在庫以内の量で記録してください。</p>
+    </div>
 
-  <div>
-    <%= f.label :consumed_at, "飲んだ日時" %><br>
-    <%= f.datetime_select :consumed_at %>
-  </div>
+    <div class="field">
+      <%= f.label :consumed_at, "飲んだ日時", class: "field__label" %>
+      <div class="field__datetime">
+        <%= f.datetime_select :consumed_at, use_month_numbers: true %>
+      </div>
+    </div>
 
-  <%= f.submit %>
+    <div class="actions">
+      <%= f.submit class: "btn btn--accent" %>
+      <%= link_to "戻る", drink_path(drink), class: "btn" %>
+    </div>
+  </div>
 <% end %>

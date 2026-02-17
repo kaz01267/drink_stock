@@ -1,7 +1,5 @@
-<h1>飲酒記録（新規）</h1>
+<h1>飲酒記録の登録</h1>
 
-<p>お酒：<%= @drink.name %>（在庫: <%= @drink.stock_ml %> ml）</p>
+<p class="muted">お酒：<strong><%= @drink.name %></strong>（在庫: <%= @drink.stock_ml %> ml）</p>
 
 <%= render "form", drink: @drink, drink_record: @drink_record %>
-
-<p><%= link_to "戻る", drinks_path %></p>

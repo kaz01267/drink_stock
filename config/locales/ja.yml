@@ -1,0 +1,63 @@
+ja:
+  date:
+    order:
+      - :year
+      - :month
+      - :day
+    month_names:
+      -
+      - 1月
+      - 2月
+      - 3月
+      - 4月
+      - 5月
+      - 6月
+      - 7月
+      - 8月
+      - 9月
+      - 10月
+      - 11月
+      - 12月
+
+  datetime:
+    order:
+      - :year
+      - :month
+      - :day
+      - :hour
+      - :minute
+
+  activerecord:
+    models:
+      drink: お酒
+      drink_record: 飲酒記録
+    attributes:
+      drink:
+        name: お酒の名前
+        stock_ml: 在庫(ml)
+      drink_record:
+        consumed_ml: 飲んだ量(ml)
+        consumed_at: 飲んだ日時
+
+  errors:
+    messages:
+      greater_than: "%{count}より大きい値にしてください"
+      blank: "を入力してください"
+      not_a_number: "は数値で入力してください"
+
+  helpers:
+    submit:
+      drink_record:
+        create: "記録する"
+        update: "更新する"
+
+  devise:
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      user:
+        signed_in: "ログインしました。"
+        signed_out: "ログアウトしました。"
+    failure:
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      already_authenticated: "すでにログインしています。"

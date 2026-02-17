@@ -1,34 +1,46 @@
 <h1>在庫一覧</h1>
 
-<p><%= link_to "お酒を登録する", new_drink_path %></p>
+<div class="actions">
+  <%= link_to "＋ お酒を登録する", new_drink_path, class: "btn btn--primary" %>
+</div>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>お酒</th>
       <th>在庫(ml)</th>
-      <th></th>
+      <th>操作</th>
     </tr>
   </thead>
   <tbody>
     <% @drinks.each do |drink| %>
       <tr>
-        <td><%= drink.name %></td>
-        <td><%= drink.stock_ml %></td>
-        <td>
-          <%= link_to "編集", edit_drink_path(drink) %>
-          <%= button_to "削除", drink_path(drink),
+        <td class="table__name">
+          <%= drink.name %>
+        </td>
+
+        <td class="table__stock <%= "is-empty" if drink.stock_ml.zero? %>">
+          <%= drink.stock_ml %> ml
+          <% if drink.stock_ml.zero? %>
+            <span class="badge badge--empty">在庫なし</span>
+          <% end %>
+        </td>
+
+        <td class="table__actions">
+          <%= link_to "詳細", drink_path(drink), class: "btn btn--small" %>
+          <%= link_to "編集", edit_drink_path(drink), class: "btn btn--small" %>
+
+          <%= button_to "削除",
+              drink_path(drink),
               method: :delete,
-              data: { turbo_confirm: "削除しますか？" } %>
+              data: { turbo_confirm: "削除しますか？" },
+              class: "btn btn--small btn--danger" %>
 
           <% if drink.stock_ml > 0 %>
-           <%= link_to "このお酒を飲んだ", new_drink_drink_record_path(drink) %>
-          <% else %>
-            <span>在庫なし</span>
-            <% end %>
-        </td>
-        <td>
-          <%= link_to "詳細", drink_path(drink) %>
+            <%= link_to "飲んだ",
+                new_drink_drink_record_path(drink),
+                class: "btn btn--small btn--accent" %>
+          <% end %>
         </td>
       </tr>
     <% end %>
