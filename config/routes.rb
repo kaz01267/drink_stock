@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "account", to: "pages#account"
   devise_for :users
   resources :drinks do
-    resources :drink_records, only: %i[new create]
+    resources :drink_records, only: %i[new create edit update destroy]
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
