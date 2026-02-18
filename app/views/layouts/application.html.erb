@@ -20,30 +20,34 @@
 
   <body>
     <% hide_nav = controller_name.in?(%w[sessions registrations passwords confirmations unlocks]) %>
+    <% lp_page  = controller_name == "pages" && action_name == "home" %>
 
     <% unless hide_nav %>
       <header class="header">
         <div class="container header__inner">
           <div class="header__brand">
             <%= link_to "DrinkStock", root_path, class: "header__logo" %>
-          </div>
+        </div>
 
+        <% unless lp_page %>
           <nav class="header__nav">
             <% if user_signed_in? %>
               <%= link_to "在庫一覧", drinks_path, class: "nav__link" %>
               <%= link_to "アカウント", account_path, class: "nav__link" %>
               <%= link_to "ログアウト",
-                          destroy_user_session_path,
-                          data: { turbo_method: :delete },
-                          class: "nav__link nav__link--danger" %>
+                        destroy_user_session_path,
+                        data: { turbo_method: :delete },
+                        class: "nav__link nav__link--danger" %>
             <% else %>
               <%= link_to "ログイン", new_user_session_path, class: "nav__link" %>
               <%= link_to "新規登録", new_user_registration_path, class: "nav__link nav__link--primary" %>
-            <% end %>
+          <% end %>
           </nav>
+        <% end %>
         </div>
       </header>
     <% end %>
+
 
     <main class="container">
       <% flash.each do |type, message| %>

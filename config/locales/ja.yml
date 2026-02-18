@@ -60,4 +60,7 @@ ja:
         signed_out: "ログアウトしました。"
     failure:
       invalid: "メールアドレスまたはパスワードが正しくありません。"
+      unauthenticated: "ログインしてください。"
       already_authenticated: "すでにログインしています。"
+      user:
+        unauthenticated: "ログインしてください。"

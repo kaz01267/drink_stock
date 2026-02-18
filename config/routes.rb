@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # get "pages/account"
+  get "home", to: "pages#home"
   get "account", to: "pages#account"
   devise_for :users
   resources :drinks do
