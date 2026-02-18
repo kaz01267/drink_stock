@@ -1,24 +1,30 @@
-<h1>DrinkStock</h1>
-
-<p>
-  家にあるお酒の在庫管理と飲酒記録をまとめて管理するアプリです。
-</p>
-
-<ul>
-  <li>在庫を登録する</li>
-  <li>飲んだら記録する</li>
-  <li>あとから振り返る</li>
-</ul>
-
-<% unless user_signed_in? %>
-  <p>
-    <%= link_to "ログイン", new_user_session_path %> /
-    <%= link_to "新規登録", new_user_registration_path %>
+<section class="lp">
+  <h1 class="lp__title">DrinkStock</h1>
+  <p class="lp__lead">
+    家にあるお酒の在庫管理と飲酒記録をまとめて管理できるアプリです。
   </p>
-<% end %>
 
-<% if user_signed_in? %>
-  <p>
-    <%= link_to "在庫一覧へ", drinks_path %>
-  </p>
-<% end %>
+  <div class="lp__cta">
+    <% if user_signed_in? %>
+      <%= link_to "在庫一覧へ", drinks_path, class: "btn btn--primary" %>
+    <% else %>
+      <%= link_to "ログイン", new_user_session_path, class: "btn btn--primary" %>
+      <%= link_to "新規登録", new_user_registration_path, class: "btn" %>
+    <% end %>
+  </div>
+
+  <div class="lp__points">
+    <div class="lp__card">
+      <h2>① 在庫を登録</h2>
+      <p>家にあるお酒を先に登録しておく。</p>
+    </div>
+    <div class="lp__card">
+      <h2>② 飲んだら記録</h2>
+      <p>飲酒量を入れるだけで履歴に残せる。</p>
+    </div>
+    <div class="lp__card">
+      <h2>③ 在庫が自動更新</h2>
+      <p>記録した分だけ在庫が減って、今がわかる。</p>
+    </div>
+  </div>
+</section>
