@@ -40,10 +40,13 @@ ja:
         consumed_at: 飲んだ日時
 
   errors:
+    not_saved: "%{count}件のエラーにより保存できませんでした。"
     messages:
       greater_than: "%{count}より大きい値にしてください"
       blank: "を入力してください"
       not_a_number: "は数値で入力してください"
+      not_saved: "%{count}件のエラーにより保存できませんでした。"
+      taken: "はすでに使用されています"
 
   helpers:
     submit:
@@ -62,5 +65,14 @@ ja:
       invalid: "メールアドレスまたはパスワードが正しくありません。"
       unauthenticated: "ログインしてください。"
       already_authenticated: "すでにログインしています。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+
       user:
         unauthenticated: "ログインしてください。"
+        not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+
+  support:
+    array:
+      words_connector: "、"
+      two_words_connector: "と"
+      last_word_connector: "、"

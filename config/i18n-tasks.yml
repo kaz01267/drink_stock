@@ -1,0 +1,12 @@
+base_locale: ja
+locales:
+  - ja
+
+data:
+  read:
+    - config/locales/ja.yml
+
+search:
+  paths:
+    - app
+    - config
