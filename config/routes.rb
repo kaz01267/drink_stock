@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get "home", to: "pages#home"
   get "account", to: "pages#account"
+  get "terms",   to: "pages#terms"
+  get "privacy", to: "pages#privacy"
   devise_for :users
   resources :drinks do
     resources :drink_records, only: %i[new create edit update destroy]
