@@ -6,4 +6,8 @@ class PagesController < ApplicationController
   def account
     authenticate_user!
   end
+
+  def terms; end
+
+  def privacy; end
 end
