@@ -1,0 +1,6 @@
+base_locale: ja
+locales:
+  - ja
+
+ignore_missing:
+  - errors.messages.not_saved
