@@ -1,0 +1,40 @@
+<h1>ログイン</h1>
+<p class="muted">DrinkStockにログインして在庫管理を始めましょう。</p>
+
+<div class="form">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <% if resource.errors.any? %>
+      <div class="alert alert--danger">
+        <ul>
+          <% resource.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :email, class: "field__label" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "field__input" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :password, class: "field__label" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "field__input" %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="field">
+        <label>
+          <%= f.check_box :remember_me %>
+          次回から自動ログイン
+        </label>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "ログイン", class: "btn btn--primary" %>
+      <%= link_to "新規登録へ", new_registration_path(resource_name), class: "btn" %>
+    </div>
+  <% end %>
+</div>
