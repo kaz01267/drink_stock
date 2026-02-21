@@ -38,6 +38,12 @@ ja:
       drink_record:
         consumed_ml: 飲んだ量(ml)
         consumed_at: 飲んだ日時
+    errors:
+      models:
+        user:
+          attributes:
+            password_confirmation:
+              confirmation: "がパスワードと一致しません"
 
   errors:
     not_saved: "%{count}件のエラーにより保存できませんでした。"
@@ -47,6 +53,8 @@ ja:
       not_a_number: "は数値で入力してください"
       not_saved: "%{count}件のエラーにより保存できませんでした。"
       taken: "はすでに使用されています"
+      too_short: "は%{count}文字以上で入力してください"
+      confirmation: "が一致しません"
 
   helpers:
     submit:
