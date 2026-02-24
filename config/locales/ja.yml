@@ -48,13 +48,21 @@ ja:
   errors:
     not_saved: "%{count}件のエラーにより保存できませんでした。"
     messages:
-      greater_than: "%{count}より大きい値にしてください"
       blank: "を入力してください"
       not_a_number: "は数値で入力してください"
-      not_saved: "%{count}件のエラーにより保存できませんでした。"
+      greater_than: "%{count}より大きい値にしてください"
+      greater_than_or_equal_to: "%{count}以上の値にしてください"
+      less_than: "%{count}未満の値にしてください"
+      less_than_or_equal_to: "%{count}以下の値にしてください"
       taken: "はすでに使用されています"
       too_short: "は%{count}文字以上で入力してください"
+      too_long: "は%{count}文字以内で入力してください"
+      wrong_length: "は%{count}文字で入力してください"
+      not_an_integer: "は整数で入力してください"
+      invalid: "は不正な値です"
       confirmation: "が一致しません"
+      accepted: "を受諾してください"
+      not_saved: "%{count}件のエラーにより保存できませんでした。"
 
   helpers:
     submit:
@@ -69,15 +77,28 @@ ja:
       user:
         signed_in: "ログインしました。"
         signed_out: "ログアウトしました。"
+      already_signed_out: "すでにログアウトしています。"
+
+    registrations:
+      signed_up: "アカウント登録が完了しました。"
+      user:
+        signed_up: "アカウント登録が完了しました。"
+      updated: "アカウント情報を更新しました。"
+      destroyed: "アカウントを削除しました。"
+
     failure:
       invalid: "メールアドレスまたはパスワードが正しくありません。"
       unauthenticated: "ログインしてください。"
       already_authenticated: "すでにログインしています。"
       not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
-
       user:
         unauthenticated: "ログインしてください。"
         not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+
+    passwords:
+      send_instructions: "パスワード再設定用のメールを送信しました。"
+      updated: "パスワードを変更しました。"
+      updated_not_active: "パスワードを変更しました。"
 
   support:
     array:
