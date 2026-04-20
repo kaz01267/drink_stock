@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "account", to: "pages#account"
   get "terms",   to: "pages#terms"
   get "privacy", to: "pages#privacy"
+  get 'guide', to: 'pages#guide'
   devise_for :users
   resources :drinks do
     resources :drink_records, only: %i[new create edit update destroy]
