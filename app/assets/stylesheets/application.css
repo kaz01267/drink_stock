@@ -335,3 +335,117 @@
 .lp__card { border: 1px solid var(--border); border-radius: 12px; padding: 14px; background: var(--bg); }
 .lp__card h2 { font-size: 16px; margin: 0 0 6px; }
 .lp__card p { margin: 0; color: var(--muted); }
+
+/* guideページ用 */
+.guide {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 0 56px;
+}
+
+.guide__hero {
+  background: #f8f8f8;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 32px 24px;
+  margin-bottom: 40px;
+}
+
+.guide__title {
+  font-size: 32px;
+  margin: 0 0 16px;
+}
+
+.guide__lead {
+  margin: 0 0 12px;
+  line-height: 1.8;
+}
+
+.guide__section {
+  margin-bottom: 40px;
+}
+
+.guide__heading {
+  font-size: 24px;
+  margin: 0 0 20px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e5e5e5;
+}
+
+.guide__steps {
+  display: grid;
+  gap: 20px;
+}
+
+.guide__card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.guide__step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  background: #222;
+  color: #fff;
+}
+
+.guide__card-title {
+  font-size: 20px;
+  margin: 0 0 12px;
+}
+
+.guide__text {
+  margin: 0 0 12px;
+  line-height: 1.8;
+}
+
+.guide__text--strong {
+  font-weight: bold;
+}
+
+.guide__feature-box {
+  background: #fafafa;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.guide__list {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.9;
+}
+
+@media (max-width: 768px) {
+  .guide {
+    padding: 24px 0 40px;
+  }
+
+  .guide__hero,
+  .guide__card,
+  .guide__feature-box {
+    padding: 20px;
+  }
+
+  .guide__title {
+    font-size: 28px;
+  }
+
+  .guide__heading {
+    font-size: 22px;
+  }
+
+  .guide__card-title {
+    font-size: 18px;
+  }
+}
