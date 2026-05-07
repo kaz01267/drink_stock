@@ -1,30 +1,54 @@
 <section class="lp">
-  <h1 class="lp__title">DrinkStock</h1>
-  <p class="lp__lead">
-    家にあるお酒の在庫管理と飲酒記録をまとめて管理できるアプリです。
-  </p>
+  <div class="lp__hero">
+    <p class="lp__label">お酒の在庫管理 × 飲酒記録</p>
+    <h1 class="lp__title">DrinkStock</h1>
+    <p class="lp__lead">
+      家にあるお酒の在庫管理と飲酒記録をまとめて管理できるアプリです。
+    </p>
+    <p class="lp__sublead">
+      飲酒記録にあわせて在庫も自動更新されるため、今あるお酒とこれまでの記録をまとめて確認できます。
+    </p>
 
-  <div class="lp__cta">
-    <% if user_signed_in? %>
-      <%= link_to "在庫一覧へ", drinks_path, class: "btn btn--primary" %>
-    <% else %>
-      <%= link_to "ログイン", new_user_session_path, class: "btn btn--primary" %>
-      <%= link_to "新規登録", new_user_registration_path, class: "btn" %>
-    <% end %>
+    <div class="lp__cta">
+      <% if user_signed_in? %>
+        <%= link_to "在庫一覧へ", drinks_path, class: "btn btn--primary" %>
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path, class: "btn btn--primary" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "btn" %>
+      <% end %>
+
+      <%= link_to "使い方を見る", guide_path, class: "btn btn--guide" %>
+    </div>
   </div>
 
-  <div class="lp__points">
-    <div class="lp__card">
-      <h2>① 在庫を登録</h2>
-      <p>家にあるお酒を先に登録しておく。</p>
+  <section class="lp__section">
+    <h2 class="lp__section-title">DrinkStockでできること</h2>
+
+    <div class="lp__points">
+      <div class="lp__card">
+        <h3>① 在庫を登録</h3>
+        <p>家にあるお酒を登録して、今どれくらい残っているかを把握できます。</p>
+      </div>
+      <div class="lp__card">
+        <h3>② 飲んだら記録</h3>
+        <p>飲んだお酒や量を記録して、日々の履歴を簡単に残せます。</p>
+      </div>
+      <div class="lp__card">
+        <h3>③ 在庫が自動更新</h3>
+        <p>記録した分だけ在庫が減るため、手動で管理しなくても今の状態がわかります。</p>
+      </div>
     </div>
-    <div class="lp__card">
-      <h2>② 飲んだら記録</h2>
-      <p>飲酒量を入れるだけで履歴に残せる。</p>
+  </section>
+
+  <section class="lp__section">
+    <h2 class="lp__section-title">こんな方におすすめ</h2>
+
+    <div class="lp__recommend">
+      <div class="lp__recommend-box">
+        <p>・家にお酒が増えがちな方</p>
+        <p>・何を飲むか毎回迷ってしまう方</p>
+        <p>・飲酒記録を簡単に残したい方</p>
+      </div>
     </div>
-    <div class="lp__card">
-      <h2>③ 在庫が自動更新</h2>
-      <p>記録した分だけ在庫が減って、今がわかる。</p>
-    </div>
-  </div>
+  </section>
 </section>
