@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   get "home", to: "pages#home"
   get "account", to: "pages#account"
   get "terms",   to: "pages#terms"
