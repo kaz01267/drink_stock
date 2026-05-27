@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
+  resources :drink_records, only: %i[index]
+
   resources :drinks do
     resources :drink_records, only: %i[new create edit update destroy]
   end
