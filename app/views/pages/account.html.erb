@@ -1,13 +1,24 @@
 <h1>アカウント</h1>
+<p class="muted">登録しているアカウント情報を確認できます。</p>
 
 <% if user_signed_in? %>
-  <p>ログイン中: <%= current_user.email %></p>
-  <%#= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+  <div class="form">
+    <div class="field">
+      <div class="field__label">ユーザーネーム</div>
+      <p><%= current_user.name.presence || "未設定" %></p>
+    </div>
+
+    <div class="field">
+      <div class="field__label">メールアドレス</div>
+      <p><%= current_user.email %></p>
+    </div>
+
+    <div class="actions">
+      <%= link_to "アカウントを編集する", edit_user_registration_path, class: "btn btn--primary" %>
+      <%= link_to "トップへ戻る", root_path, class: "btn" %>
+    </div>
+  </div>
 <% else %>
   <p>ログインしていません</p>
-  <p><a href="/users/sign_in">ログイン</a></p>
+  <p><%= link_to "ログイン", new_user_session_path, class: "btn btn--primary" %></p>
 <% end %>
-
-<p><%= link_to "トップへ戻る", root_path, class: "btn" %></p>
-
-
