@@ -754,3 +754,46 @@
   margin-right: 8px;
   margin-bottom: 8px;
 }
+
+.drink-detail {
+  margin-top: 16px;
+}
+
+.drink-detail__header {
+  margin-bottom: 16px;
+}
+
+.drink-detail__title {
+  margin-bottom: 8px;
+}
+
+.drink-detail__card {
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.drink-detail__stock-area {
+  margin-bottom: 20px;
+}
+
+.drink-detail__stock {
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.drink-detail__stock.is-empty {
+  color: #b00020;
+}
+
+.drink-detail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.table__action-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

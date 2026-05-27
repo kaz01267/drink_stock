@@ -1,68 +1,84 @@
 <h1>お酒の詳細</h1>
+<p class="muted">在庫状況と飲酒履歴を確認できます。</p>
 
-<h2><%= @drink.name %></h2>
+<div class="drink-detail">
+  <div class="drink-detail__header">
+    <h2 class="drink-detail__title"><%= @drink.name %></h2>
+  </div>
 
-<div class="card">
-  <div class="card__row">
-    <div>
+  <div class="card drink-detail__card">
+    <div class="drink-detail__stock-area">
       <div class="label">現在の在庫</div>
-      <div class="value <%= "is-empty" if @drink.stock_ml.to_i.zero? %>">
+      <div class="value drink-detail__stock <%= "is-empty" if @drink.stock_ml.to_i.zero? %>">
         <%= @drink.stock_ml %> ml
         <% if @drink.stock_ml.to_i.zero? %>
           <span class="badge badge--empty">在庫なし</span>
+        <% else %>
+          <span class="badge badge--active">在庫あり</span>
         <% end %>
       </div>
     </div>
 
-    <div class="card__actions">
-      <%= link_to "在庫一覧へ戻る", drinks_path, class: "btn btn--small" %>
-      <%= link_to "編集", edit_drink_path(@drink), class: "btn btn--small" %>
+    <div class="drink-detail__actions">
+      <% if @drink.stock_ml.to_i > 0 %>
+        <%= link_to "このお酒を飲んだ",
+            new_drink_drink_record_path(@drink),
+            class: "btn btn--accent" %>
+      <% end %>
+
+      <%= link_to "編集", edit_drink_path(@drink), class: "btn" %>
+      <%= link_to "在庫一覧へ戻る", drinks_path, class: "btn" %>
       <%= button_to "削除",
           drink_path(@drink),
           method: :delete,
           data: { turbo_confirm: "削除しますか？" },
-          class: "btn btn--small btn--danger" %>
+          class: "btn btn--danger" %>
+    </div>
+  </div>
+
+  <h2 class="section-title">飲酒履歴</h2>
+
+  <% if @drink_records.present? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>日時</th>
+          <th>量(ml)</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @drink_records.each do |record| %>
+          <tr>
+            <td><%= l(record.consumed_at, format: :short) rescue record.consumed_at %></td>
+            <td><%= record.consumed_ml %> ml</td>
+            <td class="table__actions">
+              <div class="table__action-group">
+                <%= link_to "編集",
+                    edit_drink_drink_record_path(@drink, record),
+                    class: "btn btn--small" %>
+
+                <%= button_to "削除",
+                    drink_drink_record_path(@drink, record),
+                    method: :delete,
+                    data: { turbo_confirm: "この履歴を削除しますか？" },
+                    class: "btn btn--small btn--danger" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="empty-state">
+      <p class="empty-state__title">まだ飲酒履歴がありません。</p>
+      <p class="empty-state__text">このお酒を飲んだときに記録すると、ここに履歴が表示されます。</p>
 
       <% if @drink.stock_ml.to_i > 0 %>
         <%= link_to "このお酒を飲んだ",
             new_drink_drink_record_path(@drink),
-            class: "btn btn--small btn--accent" %>
+            class: "btn btn--accent" %>
       <% end %>
     </div>
-  </div>
+  <% end %>
 </div>
-
-<h2 class="section-title">飲酒履歴</h2>
-
-<% if @drink_records.present? %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>日時</th>
-        <th>量(ml)</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @drink_records.each do |record| %>
-        <tr>
-          <td><%= l(record.consumed_at, format: :short) rescue record.consumed_at %></td>
-          <td><%= record.consumed_ml %> ml</td>
-          <td class="table__actions">
-            <%= link_to "編集",
-                edit_drink_drink_record_path(@drink, record),
-                class: "btn btn--small" %>
-
-            <%= button_to "削除",
-                drink_drink_record_path(@drink, record),
-                method: :delete,
-                data: { turbo_confirm: "この履歴を削除しますか？" },
-                class: "btn btn--small btn--danger" %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p class="muted">まだ飲酒履歴がありません。</p>
-<% end %>
