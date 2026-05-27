@@ -1,0 +1,39 @@
+<h1>飲酒ログ</h1>
+<p class="muted">これまでに記録した飲酒履歴を確認できます。</p>
+
+<% if @drink_records.any? %>
+  <div class="log-list">
+    <% @drink_records.each do |record| %>
+      <div class="log-card">
+        <div class="log-card__main">
+          <h2 class="log-card__title"><%= record.drink.name %></h2>
+          <p class="muted">
+            <%= l(record.consumed_at, format: :short) rescue record.consumed_at %>
+          </p>
+        </div>
+
+        <div class="log-card__amount">
+          <%= record.consumed_ml %> ml
+        </div>
+
+        <div class="log-card__actions">
+          <%= link_to "編集",
+              edit_drink_drink_record_path(record.drink, record),
+              class: "btn btn--small" %>
+
+          <%= button_to "削除",
+              drink_drink_record_path(record.drink, record),
+              method: :delete,
+              data: { turbo_confirm: "この履歴を削除しますか？" },
+              class: "btn btn--small btn--danger" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="empty-state">
+    <p class="empty-state__title">まだ飲酒ログがありません。</p>
+    <p class="empty-state__text">お酒を飲んだ記録を登録すると、ここに履歴が表示されます。</p>
+    <%= link_to "在庫一覧へ", drinks_path, class: "btn btn--primary" %>
+  </div>
+<% end %>

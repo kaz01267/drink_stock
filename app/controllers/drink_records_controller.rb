@@ -1,8 +1,11 @@
 class DrinkRecordsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_drink
+  before_action :set_drink, except: :index
   before_action :set_drink_record, only: %i[edit update destroy]
 
+  def index
+    @drink_records = current_user.drink_records.includes(:drink).order(consumed_at: :desc)
+  end
 
   def new
     @drink_record = @drink.drink_records.new(consumed_at: Time.current)
