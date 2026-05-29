@@ -1,0 +1,60 @@
+<%= form_with model: drink.present? ? [drink, drink_log] : drink_log, local: true do |f| %>
+  <% if drink_log.errors.any? %>
+    <div class="alert alert--danger">
+      <ul>
+        <% drink_log.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form form--record">
+    <% if drink.present? %>
+      <p class="muted">お酒：<strong><%= drink.name %></strong></p>
+    <% else %>
+      <div class="field">
+        <%= f.label :drink_name, "お酒の名前", class: "field__label" %>
+        <%= f.text_field :drink_name,
+            class: "field__input",
+            placeholder: "例: 山崎" %>
+        <p class="help">在庫に登録していないお酒もログとして残せます。</p>
+      </div>
+    <% end %>
+
+    <div class="field">
+  <%= f.label :memo, "メモ・感想", class: "field__label" %>
+  <%= f.text_area :memo,
+      rows: 6,
+      class: "field__input",
+      placeholder: "例: 香りがよく、食事に合わせやすかったです。" %>
+  <p class="help">空欄でも登録できます。感想やまた飲みたいかなどを自由に残せます。</p>
+</div>
+
+<div class="field">
+  <%= f.label :rating, "評価", class: "field__label" %>
+  <%= f.select :rating,
+      options_for_select((1..5).map { |n| ["★" * n, n] }, drink_log.rating),
+      { include_blank: "評価を選択" },
+      class: "field__input" %>
+  <p class="help">任意で1〜5の範囲で評価できます。</p>
+</div>
+
+    <div class="field">
+      <%= f.label :logged_at, "記録日", class: "field__label" %>
+      <div class="field__datetime">
+        <%= f.date_select :logged_at, use_month_numbers: true %>
+      </div>
+    </div>
+
+    <div class="actions actions--record">
+      <%= f.submit "保存する", class: "btn btn--accent" %>
+
+      <% if drink.present? %>
+        <%= link_to "戻る", drink_path(drink), class: "btn" %>
+      <% else %>
+        <%= link_to "戻る", drink_logs_path, class: "btn" %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  drink: one
+  memo: MyText
+  rating: 1
+  logged_at: 2026-05-29 17:12:11
+
+two:
+  user: two
+  drink: two
+  memo: MyText
+  rating: 1
+  logged_at: 2026-05-29 17:12:11

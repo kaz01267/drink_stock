@@ -1,0 +1,52 @@
+<h1>お酒ログ</h1>
+<p class="muted">お酒ごとに残した感想や評価を確認できます。</p>
+
+<div class="actions actions--top">
+  <%= link_to "＋ ログを書く", new_drink_log_path, class: "btn btn--primary" %>
+</div>
+
+<% if @drink_logs.any? %>
+  <div class="log-list">
+    <% @drink_logs.each do |log| %>
+      <div class="log-card">
+        <div class="log-card__main">
+          <h2 class="log-card__title">
+            <%= log.drink&.name || log.drink_name %>
+          </h2>
+
+          <p class="muted">
+            <%= log.logged_at.strftime("%Y/%m/%d") %>
+          </p>
+
+          <% if log.rating.present? %>
+            <p class="drink-log__rating">
+              評価：<%= "★" * log.rating %>
+            </p>
+          <% end %>
+
+          <% if log.memo.present? %>
+            <div class="drink-log__memo"><%= simple_format(log.memo) %></div>
+          <% end %>
+        </div>
+
+        <div class="log-card__actions">
+          <%= link_to "編集",
+              edit_drink_log_path(log),
+              class: "btn btn--small" %>
+
+          <%= button_to "削除",
+              drink_log_path(log),
+              method: :delete,
+              data: { turbo_confirm: "このログを削除しますか？" },
+              class: "btn btn--small btn--danger" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="empty-state">
+    <p class="empty-state__title">まだお酒ログがありません。</p>
+    <p class="empty-state__text">飲んだ感想や評価を残すと、ここにログが表示されます。</p>
+    <%= link_to "＋ ログを書く", new_drink_log_path, class: "btn btn--primary" %>
+  </div>
+<% end %>

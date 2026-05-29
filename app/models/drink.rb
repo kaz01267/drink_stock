@@ -1,6 +1,7 @@
 class Drink < ApplicationRecord
   belongs_to :user
   has_many :drink_records, dependent: :destroy
+  has_many :drink_logs, dependent: :destroy
 
   before_validation :normalize_name
 
