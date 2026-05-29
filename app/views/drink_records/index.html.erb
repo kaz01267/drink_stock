@@ -1,5 +1,5 @@
-<h1>飲酒ログ</h1>
-<p class="muted">これまでに記録した飲酒履歴を確認できます。</p>
+<h1>飲酒履歴</h1>
+<p class="muted">これまでに記録した飲酒量や日付を確認できます。</p>
 
 <% if @drink_records.any? %>
   <div class="log-list">
@@ -32,7 +32,7 @@
   </div>
 <% else %>
   <div class="empty-state">
-    <p class="empty-state__title">まだ飲酒ログがありません。</p>
+    <p class="empty-state__title">まだ飲酒履歴がありません。</p>
     <p class="empty-state__text">お酒を飲んだ記録を登録すると、ここに履歴が表示されます。</p>
     <%= link_to "在庫一覧へ", drinks_path, class: "btn btn--primary" %>
   </div>
