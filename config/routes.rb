@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "drink_logs/index"
+  get "drink_logs/new"
+  get "drink_logs/edit"
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   get "home", to: "pages#home"
@@ -12,9 +15,11 @@ Rails.application.routes.draw do
   }
 
   resources :drink_records, only: %i[index]
+  resources :drink_logs, only: %i[index new create edit update destroy]
 
   resources :drinks do
     resources :drink_records, only: %i[new create edit update destroy]
+    resources :drink_logs, only: %i[new create edit update destroy]
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

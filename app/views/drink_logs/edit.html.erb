@@ -1,0 +1,6 @@
+<h1>お酒ログを編集</h1>
+<p class="muted">
+  お酒：<strong><%= @drink&.name || @drink_log.drink_name %></strong>
+</p>
+
+<%= render "form", drink: @drink, drink_log: @drink_log %>

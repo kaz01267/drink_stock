@@ -32,6 +32,7 @@
           <% if user_signed_in? %>
             <%= link_to "在庫一覧", drinks_path, class: "nav__link" %>
             <%= link_to "飲酒履歴", drink_records_path, class: "nav__link" %>
+            <%= link_to "お酒ログ", drink_logs_path, class: "nav__link" %>
             <%= link_to "使い方", guide_path, class: "nav__link" %>
             <%= link_to "アカウント", account_path, class: "nav__link" %>
             <%= link_to "ログアウト",

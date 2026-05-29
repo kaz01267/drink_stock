@@ -8,7 +8,7 @@
         <div class="log-card__main">
           <h2 class="log-card__title"><%= record.drink.name %></h2>
           <p class="muted">
-            <%= l(record.consumed_at, format: :short) rescue record.consumed_at %>
+            <%= record.consumed_at.strftime("%Y/%m/%d") %>
           </p>
         </div>
 

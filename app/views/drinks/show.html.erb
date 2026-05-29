@@ -26,6 +26,10 @@
             class: "btn btn--accent" %>
       <% end %>
 
+      <%= link_to "ログを書く",
+          new_drink_drink_log_path(@drink),
+          class: "btn" %>
+
       <%= link_to "編集", edit_drink_path(@drink), class: "btn" %>
       <%= link_to "在庫一覧へ戻る", drinks_path, class: "btn" %>
       <%= button_to "削除",
