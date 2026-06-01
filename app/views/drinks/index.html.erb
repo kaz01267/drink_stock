@@ -5,6 +5,28 @@
   <%= link_to "＋ お酒を登録する", new_drink_path, class: "btn btn--primary" %>
 </div>
 
+<% if @suggested_drink.present? %>
+  <div class="suggestion-banner">
+    <div class="suggestion-banner__content">
+      <p class="suggestion-banner__label">今日のお酒の提案</p>
+      <h2 class="suggestion-banner__title"><%= @suggested_drink.name %></h2>
+      <p class="suggestion-banner__text">
+        今日はこのお酒を飲んでみませんか？
+      </p>
+    </div>
+
+    <div class="suggestion-banner__actions">
+      <%= link_to "このお酒を飲んだ",
+          new_drink_drink_record_path(@suggested_drink),
+          class: "btn btn--accent" %>
+
+      <%= link_to "詳細を見る",
+          drink_path(@suggested_drink),
+          class: "btn" %>
+    </div>
+  </div>
+<% end %>
+
 <% if @drinks.any? %>
   <div class="drink-cards">
     <% @drinks.each do |drink| %>
