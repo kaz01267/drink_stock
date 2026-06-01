@@ -4,6 +4,7 @@ class DrinksController < ApplicationController
 
   def index
     @drinks = current_user.drinks.order(created_at: :desc)
+    @suggested_drink = current_user.drinks.where("stock_ml > 0").order("RANDOM()").first
   end
 
   def new
