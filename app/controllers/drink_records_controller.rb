@@ -5,6 +5,18 @@ class DrinkRecordsController < ApplicationController
 
   def index
     @drink_records = current_user.drink_records.includes(:drink).order(consumed_at: :desc)
+
+    @weekly_consumed_ml = current_user.drink_records
+      .where(consumed_at: 7.days.ago.beginning_of_day..Time.current)
+      .sum(:consumed_ml)
+
+    @monthly_record_count = current_user.drink_records
+      .where(consumed_at: 30.days.ago.beginning_of_day..Time.current)
+      .count
+
+    @monthly_consumed_ml = current_user.drink_records
+      .where(consumed_at: 30.days.ago.beginning_of_day..Time.current)
+      .sum(:consumed_ml)
   end
 
   def new
@@ -50,7 +62,7 @@ class DrinkRecordsController < ApplicationController
       new_stock = restored_stock - new_consumed
 
       if new_stock < 0
-        @drink_record.assign_attributes(drink_record_params) # 画面に入力値を残す
+        @drink_record.assign_attributes(drink_record_params)
         @drink_record.errors.add(:consumed_ml, "が在庫を超えています")
         raise ActiveRecord::RecordInvalid, @drink_record
       end
@@ -59,7 +71,7 @@ class DrinkRecordsController < ApplicationController
       @drink.update!(stock_ml: new_stock)
     end
 
-    redirect_to drink_path(@drink), notice: "飲酒記録を更新しました"
+    redirect_to after_update_drink_record_path, notice: "飲酒記録を更新しました"
   rescue ActiveRecord::RecordInvalid
     render :edit, status: :unprocessable_entity
   end
@@ -68,12 +80,11 @@ class DrinkRecordsController < ApplicationController
     ActiveRecord::Base.transaction do
       @drink.lock!
 
-      # 削除する分、在庫を戻す
       @drink.update!(stock_ml: @drink.stock_ml + @drink_record.consumed_ml)
       @drink_record.destroy!
     end
 
-    redirect_to drink_path(@drink), notice: "飲酒記録を削除しました"
+    redirect_to after_destroy_drink_record_path, notice: "飲酒記録を削除しました"
   end
 
   def normalize_consumed_at
@@ -92,5 +103,21 @@ class DrinkRecordsController < ApplicationController
 
   def drink_record_params
     params.require(:drink_record).permit(:consumed_ml, :consumed_at)
+  end
+
+  def after_update_drink_record_path
+    if params[:return_to] == "show"
+      drink_path(@drink)
+    else
+      drink_records_path
+    end
+  end
+
+  def after_destroy_drink_record_path
+    if params[:return_to] == "show"
+      drink_path(@drink)
+    else
+      drink_records_path
+    end
   end
 end

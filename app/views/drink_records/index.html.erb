@@ -1,6 +1,23 @@
 <h1>飲酒履歴</h1>
 <p class="muted">これまでに記録した飲酒量や日付を確認できます。</p>
 
+<div class="summary-cards">
+  <div class="summary-card">
+    <p class="summary-card__label">直近7日間の飲酒量</p>
+    <p class="summary-card__value"><%= @weekly_consumed_ml %> ml</p>
+  </div>
+
+  <div class="summary-card">
+    <p class="summary-card__label">直近30日間の飲酒回数</p>
+    <p class="summary-card__value"><%= @monthly_record_count %> 回</p>
+  </div>
+
+  <div class="summary-card">
+    <p class="summary-card__label">直近30日間の飲酒量</p>
+    <p class="summary-card__value"><%= @monthly_consumed_ml %> ml</p>
+  </div>
+</div>
+
 <% if @drink_records.any? %>
   <div class="log-list">
     <% @drink_records.each do |record| %>
@@ -18,11 +35,11 @@
 
         <div class="log-card__actions">
           <%= link_to "編集",
-              edit_drink_drink_record_path(record.drink, record),
+              edit_drink_drink_record_path(record.drink, record, return_to: "index"),
               class: "btn btn--small" %>
 
           <%= button_to "削除",
-              drink_drink_record_path(record.drink, record),
+              drink_drink_record_path(record.drink, record, return_to: "index"),
               method: :delete,
               data: { turbo_confirm: "この履歴を削除しますか？" },
               class: "btn btn--small btn--danger" %>

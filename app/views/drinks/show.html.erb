@@ -59,11 +59,11 @@
             <td class="table__actions">
               <div class="table__action-group">
                 <%= link_to "編集",
-                    edit_drink_drink_record_path(@drink, record),
+                    edit_drink_drink_record_path(@drink, record, return_to: "show"),
                     class: "btn btn--small" %>
 
                 <%= button_to "削除",
-                    drink_drink_record_path(@drink, record),
+                    drink_drink_record_path(@drink, record, return_to: "show"),
                     method: :delete,
                     data: { turbo_confirm: "この履歴を削除しますか？" },
                     class: "btn btn--small btn--danger" %>
