@@ -47,6 +47,40 @@ class DrinkRecordsController < ApplicationController
     render :new, status: :unprocessable_entity
   end
 
+  def quick_create
+    @drink = current_user.drinks.find(params[:drink_id])
+    consumed_ml = params[:consumed_ml].to_i
+
+    if consumed_ml <= 0
+      redirect_to dashboard_path, alert: "飲んだ量を選択してください"
+      return
+    end
+
+    @drink_record = @drink.drink_records.new(
+      consumed_ml: consumed_ml,
+      consumed_at: Time.current,
+      user: current_user
+    )
+
+    @drink.with_lock do
+      ActiveRecord::Base.transaction do
+        new_stock = @drink.stock_ml.to_i - consumed_ml
+
+        if new_stock < 0
+          redirect_to dashboard_path, alert: "在庫を超える量は記録できません"
+          return
+        end
+
+        @drink_record.save!
+        @drink.update!(stock_ml: new_stock)
+      end
+    end
+
+    redirect_to dashboard_path, notice: "飲酒記録を登録しました"
+  rescue ActiveRecord::RecordInvalid
+    redirect_to dashboard_path, alert: "飲酒記録を登録できませんでした"
+  end
+
 
   def edit
   end
