@@ -940,3 +940,49 @@
     grid-template-columns: 1fr;
   }
 }
+
+.dashboard-section {
+  margin-top: 32px;
+}
+
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.quick-record-card {
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.quick-record-amounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quick-record-amount {
+  cursor: pointer;
+}
+
+.quick-record-amount input {
+  display: none;
+}
+
+.quick-record-amount span {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 14px;
+}
+
+.quick-record-amount input:checked + span {
+  border-color: #333;
+  font-weight: bold;
+}

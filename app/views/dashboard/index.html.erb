@@ -1,0 +1,145 @@
+<h1>ダッシュボード</h1>
+<p class="muted">
+  こんにちは、<%= current_user.name.presence || "ゲスト" %>さん。今日もお酒を楽しく記録しましょう。
+</p>
+
+<% if @suggested_drink.present? %>
+  <div class="suggestion-banner">
+    <div class="suggestion-banner__content">
+      <p class="suggestion-banner__label">今日のお酒</p>
+      <h2 class="suggestion-banner__title"><%= @suggested_drink.name %></h2>
+    </div>
+
+    <div class="suggestion-banner__actions">
+      <%= link_to "飲んだ",
+          new_drink_drink_record_path(@suggested_drink),
+          class: "btn btn--small btn--accent" %>
+
+      <%= link_to "詳細",
+          drink_path(@suggested_drink),
+          class: "btn btn--small" %>
+    </div>
+  </div>
+<% end %>
+
+<div class="dashboard-section">
+  <h2 class="section-title">クイック記録</h2>
+
+  <% if @available_drinks.any? %>
+    <div class="quick-record-card">
+      <%= form_with url: quick_create_drink_records_path, method: :post, local: true do |f| %>
+        <div class="field">
+          <%= label_tag :drink_id, "お酒を選択", class: "field__label" %>
+          <%= select_tag :drink_id,
+              options_from_collection_for_select(@available_drinks, :id, :name),
+              class: "field__input" %>
+        </div>
+
+        <div class="field">
+          <p class="field__label">飲んだ量</p>
+
+          <div class="quick-record-amounts">
+            <label class="quick-record-amount">
+              <%= radio_button_tag :consumed_ml, 30 %>
+              <span>30ml</span>
+            </label>
+
+            <label class="quick-record-amount">
+              <%= radio_button_tag :consumed_ml, 60 %>
+              <span>60ml</span>
+            </label>
+
+            <label class="quick-record-amount">
+              <%= radio_button_tag :consumed_ml, 90 %>
+              <span>90ml</span>
+            </label>
+
+            <label class="quick-record-amount">
+              <%= radio_button_tag :consumed_ml, 120 %>
+              <span>120ml</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "記録する", class: "btn btn--accent" %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <p class="empty-state__title">記録できるお酒がありません。</p>
+      <p class="empty-state__text">在庫のあるお酒を登録すると、ここからすぐに記録できます。</p>
+      <%= link_to "＋ お酒を登録する", new_drink_path, class: "btn btn--primary" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="summary-cards">
+  <div class="summary-card">
+    <p class="summary-card__label">現在の在庫数</p>
+    <p class="summary-card__value"><%= @drink_count %> 本</p>
+  </div>
+
+  <div class="summary-card">
+    <p class="summary-card__label">直近7日間の飲酒量</p>
+    <p class="summary-card__value"><%= @weekly_consumed_ml %> ml</p>
+  </div>
+
+  <div class="summary-card">
+    <p class="summary-card__label">直近30日間の飲酒回数</p>
+    <p class="summary-card__value"><%= @monthly_record_count %> 回</p>
+  </div>
+
+  <div class="summary-card">
+    <p class="summary-card__label">直近30日間の飲酒量</p>
+    <p class="summary-card__value"><%= @monthly_consumed_ml %> ml</p>
+  </div>
+</div>
+
+<div class="dashboard-section">
+  <h2 class="section-title">クイックメニュー</h2>
+
+  <div class="quick-actions">
+    <%= link_to "在庫一覧を見る", drinks_path, class: "btn" %>
+    <%= link_to "お酒を登録する", new_drink_path, class: "btn btn--primary" %>
+    <%= link_to "飲酒履歴を見る", drink_records_path, class: "btn" %>
+    <%= link_to "お酒ログを見る", drink_logs_path, class: "btn" %>
+    <%= link_to "ログを書く", new_drink_log_path, class: "btn" %>
+  </div>
+</div>
+
+<div class="dashboard-section">
+  <h2 class="section-title">最近のお酒ログ</h2>
+
+  <% if @recent_drink_logs.any? %>
+    <div class="log-list">
+      <% @recent_drink_logs.each do |log| %>
+        <div class="log-card">
+          <div class="log-card__main">
+            <h3 class="log-card__title"><%= log.drink&.name || log.drink_name %></h3>
+            <p class="muted"><%= log.logged_at.strftime("%Y/%m/%d") %></p>
+
+            <% if log.rating.present? %>
+              <p class="drink-log__rating">評価：<%= "★" * log.rating %></p>
+            <% end %>
+
+            <% if log.memo.present? %>
+              <div class="drink-log__memo"><%= simple_format(log.memo) %></div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="actions">
+      <%= link_to "お酒ログをすべて見る", drink_logs_path, class: "btn" %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <p class="empty-state__title">まだお酒ログがありません。</p>
+      <p class="empty-state__text">飲んだ感想や評価を残すと、ここに表示されます。</p>
+      <%= link_to "＋ ログを書く", new_drink_log_path, class: "btn btn--primary" %>
+    </div>
+  <% end %>
+</div>
