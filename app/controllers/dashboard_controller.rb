@@ -19,5 +19,20 @@ class DashboardController < ApplicationController
       .sum(:consumed_ml)
 
     @recent_drink_logs = current_user.drink_logs.includes(:drink).order(logged_at: :desc).limit(3)
+
+    today = Time.zone.today
+    @weekly_drinking_chart = (6.days.ago.to_date..today).map do |date|
+      total_ml = current_user.drink_records
+        .where(consumed_at: date.beginning_of_day..date.end_of_day)
+        .sum(:consumed_ml)
+
+     {
+       date: date,
+       label: date.strftime("%-m/%-d"),
+       total_ml: total_ml
+     }
+    end
+
+    @weekly_max_consumed_ml = @weekly_drinking_chart.map { |data| data[:total_ml] }.max.to_i
   end
 end
