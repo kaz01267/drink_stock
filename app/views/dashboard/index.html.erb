@@ -98,6 +98,26 @@
 </div>
 
 <div class="dashboard-section">
+  <h2 class="section-title">直近7日間の飲酒量</h2>
+
+  <div class="weekly-chart">
+    <% @weekly_drinking_chart.each do |data| %>
+      <% bar_width = @weekly_max_consumed_ml.positive? ? (data[:total_ml].to_f / @weekly_max_consumed_ml * 100).round : 0 %>
+
+      <div class="weekly-chart__row">
+        <div class="weekly-chart__label"><%= data[:label] %></div>
+
+        <div class="weekly-chart__bar-wrap">
+          <div class="weekly-chart__bar" style="width: <%= bar_width %>%"></div>
+        </div>
+
+        <div class="weekly-chart__value"><%= data[:total_ml] %>ml</div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="dashboard-section">
   <h2 class="section-title">クイックメニュー</h2>
 
   <div class="quick-actions">

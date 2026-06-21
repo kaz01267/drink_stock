@@ -986,3 +986,41 @@
   border-color: #333;
   font-weight: bold;
 }
+
+.weekly-chart {
+  display: grid;
+  gap: 12px;
+}
+
+.weekly-chart__row {
+  display: grid;
+  grid-template-columns: 48px 1fr 64px;
+  align-items: center;
+  gap: 12px;
+}
+
+.weekly-chart__label {
+  color: #666;
+  font-size: 14px;
+}
+
+.weekly-chart__bar-wrap {
+  height: 14px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #f1f1f1;
+}
+
+.weekly-chart__bar {
+  height: 100%;
+  min-width: 4px;
+  border-radius: 999px;
+  background: #8b5e3c;
+}
+
+.weekly-chart__value {
+  text-align: right;
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+}
