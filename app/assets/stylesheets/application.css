@@ -1092,3 +1092,24 @@
     font-size: 13px;
   }
 }
+
+.search-box {
+  margin: 20px 0 24px;
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.search-box__fields {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .search-box__fields {
+    grid-template-columns: 1fr;
+  }
+}

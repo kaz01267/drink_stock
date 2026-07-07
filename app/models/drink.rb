@@ -9,6 +9,14 @@ class Drink < ApplicationRecord
                    uniqueness: { scope: :user_id, case_sensitive: false }
   validates :stock_ml, numericality: { greater_than_or_equal_to: 0 }
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[name stock_ml created_at updated_at user_id]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[drink_records drink_logs user]
+  end
+
   private
 
   def normalize_name

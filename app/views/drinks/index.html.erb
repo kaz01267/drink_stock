@@ -5,6 +5,30 @@
   <%= link_to "＋ お酒を登録する", new_drink_path, class: "btn btn--primary" %>
 </div>
 
+<div class="search-box">
+  <%= search_form_for @q, url: drinks_path, method: :get do |f| %>
+    <div class="search-box__fields">
+      <div class="field">
+        <%= f.label :name_cont, "お酒の名前", class: "field__label" %>
+        <%= f.search_field :name_cont, class: "field__input", placeholder: "例: 山崎" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :stock_ml_gt, "在庫状態", class: "field__label" %>
+        <%= f.select :stock_ml_gt,
+            [["すべて", ""], ["在庫あり", 0]],
+            {},
+            class: "field__input" %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "検索", class: "btn btn--primary" %>
+      <%= link_to "リセット", drinks_path, class: "btn" %>
+    </div>
+  <% end %>
+</div>
+
 <% if @suggested_drink.present? %>
   <div class="suggestion-banner">
     <div class="suggestion-banner__content">
