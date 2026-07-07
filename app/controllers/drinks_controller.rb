@@ -3,7 +3,9 @@ class DrinksController < ApplicationController
   before_action :set_drink, only: %i[edit update destroy]
 
   def index
-    @drinks = current_user.drinks.order(created_at: :desc)
+    @q = Drink.where(user: current_user).ransack(params[:q])
+    @drinks = @q.result.order(created_at: :desc)
+
     @suggested_drink = current_user.drinks.where("stock_ml > 0").order("RANDOM()").first
   end
 
