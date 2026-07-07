@@ -10,7 +10,16 @@
     <div class="search-box__fields">
       <div class="field">
         <%= f.label :name_cont, "お酒の名前", class: "field__label" %>
-        <%= f.search_field :name_cont, class: "field__input", placeholder: "例: 山崎" %>
+        <%= f.search_field :name_cont,
+            class: "field__input",
+            placeholder: "例: 山崎",
+            list: "drink-name-options" %>
+
+        <datalist id="drink-name-options">
+          <% @drink_name_options.each do |drink_name| %>
+            <option value="<%= drink_name %>"></option>
+          <% end %>
+        </datalist>
       </div>
 
       <div class="field">

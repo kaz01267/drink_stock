@@ -6,6 +6,8 @@ class DrinksController < ApplicationController
     @q = Drink.where(user: current_user).ransack(params[:q])
     @drinks = @q.result.order(created_at: :desc)
 
+    @drink_name_options = current_user.drinks.order(:name).pluck(:name)
+
     @suggested_drink = current_user.drinks.where("stock_ml > 0").order("RANDOM()").first
   end
 
