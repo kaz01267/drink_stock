@@ -81,6 +81,10 @@ Rails.application.configure do
     host: "drink-stock.onrender.com",
     protocol: "https"
   }
+  config.action_controller.default_url_options = {
+  host: "drink-stock.onrender.com",
+  protocol: "https"
+  }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
