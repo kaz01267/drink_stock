@@ -41,4 +41,12 @@
       <%= link_to "ログインへ", new_session_path(resource_name), class: "btn" %>
     </div>
   <% end %>
+
+  <div class="actions">
+      <%= button_to "Googleで登録・ログイン",
+          user_google_oauth2_omniauth_authorize_path,
+          method: :post,
+          data: { turbo: false },
+          class: "btn btn--primary" %>
+  </div>
 </div>
