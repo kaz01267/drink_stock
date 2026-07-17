@@ -13,8 +13,9 @@ Rails.application.routes.draw do
   get "guide", to: "pages#guide"
 
   devise_for :users, controllers: {
-    registrations: "users/registrations"
-  }
+    registrations: "users/registrations",
+    omniauth_callbacks: "users/omniauth_callbacks"
+}
 
   resources :drink_records, only: %i[index]
   post "drink_records/quick_create", to: "drink_records#quick_create", as: :quick_create_drink_records
