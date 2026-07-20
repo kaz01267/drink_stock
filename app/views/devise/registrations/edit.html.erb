@@ -15,6 +15,22 @@
       <%= f.email_field :email, autocomplete: "email", class: "field__input" %>
     </div>
 
+    <div class="field">
+      <%= f.label :drinking_reminder_email_enabled, class: "field__label" do %>
+        <%= f.check_box :drinking_reminder_email_enabled %>
+        飲酒記録リマインドメールを受け取る
+      <% end %>
+      <p class="help">飲み忘れ・記録忘れを防ぐためのメールを受け取れます。</p>
+    </div>
+
+    <div class="field">
+      <%= f.label :recommended_drink_email_enabled, class: "field__label" do %>
+        <%= f.check_box :recommended_drink_email_enabled %>
+        おすすめのお酒メールを受け取る
+      <% end %>
+      <p class="help">在庫があるお酒の中から、おすすめのお酒をメールで受け取れます。</p>
+    </div>
+
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p class="help">現在確認待ちのメールアドレス: <%= resource.unconfirmed_email %></p>
     <% end %>
