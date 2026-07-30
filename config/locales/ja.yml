@@ -100,6 +100,10 @@ ja:
       updated: "パスワードを変更しました。"
       updated_not_active: "パスワードを変更しました。"
 
+    mailer:
+      reset_password_instructions:
+        subject: "【DrinkStock】パスワード再設定のご案内"
+
     omniauth_callbacks:
       success: "%{kind}アカウントでログインしました。"
       failure: "%{kind}アカウントでのログインに失敗しました。"
