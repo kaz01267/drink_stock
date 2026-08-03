@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get "dashboard/index"
+  end
   get "dashboard/index"
   get "drink_logs/index"
   get "drink_logs/new"
@@ -31,4 +34,8 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   root to: "pages#home"
+
+  namespace :admin do
+    root "dashboard#index"
+  end
 end
