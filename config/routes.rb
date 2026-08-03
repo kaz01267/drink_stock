@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get "dashboard/index"
-  end
   get "dashboard/index"
   get "drink_logs/index"
   get "drink_logs/new"
@@ -37,5 +34,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "dashboard#index"
+    resources :users, only: [ :index ]
   end
 end
