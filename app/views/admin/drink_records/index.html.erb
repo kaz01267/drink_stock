@@ -1,31 +1,38 @@
-<h1>飲酒記録一覧</h1>
+<div class="admin-container">
+  <div class="admin-header">
+    <h1>飲酒記録一覧</h1>
+    <p>ユーザーが登録した飲酒記録を確認できます。</p>
+  </div>
 
-<p><%= link_to "管理者画面へ戻る", admin_root_path %></p>
+  <%= link_to "管理者画面へ戻る", admin_root_path, class: "admin-back-link" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>お酒名</th>
-      <th>飲酒量</th>
-      <th>飲酒日時</th>
-      <th>ユーザー名</th>
-      <th>メールアドレス</th>
-      <th>登録日時</th>
-    </tr>
-  </thead>
+  <div class="admin-table-wrapper">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>お酒名</th>
+          <th>飲酒量</th>
+          <th>飲酒日時</th>
+          <th>ユーザー名</th>
+          <th>メールアドレス</th>
+          <th>登録日時</th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @drink_records.each do |drink_record| %>
-      <tr>
-        <td><%= drink_record.id %></td>
-        <td><%= drink_record.drink.name %></td>
-        <td><%= drink_record.consumed_ml %>ml</td>
-        <td><%= drink_record.consumed_at.strftime("%Y/%m/%d %H:%M") %></td>
-        <td><%= drink_record.user.name.presence || "-" %></td>
-        <td><%= drink_record.user.email %></td>
-        <td><%= drink_record.created_at.strftime("%Y/%m/%d %H:%M") %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @drink_records.each do |drink_record| %>
+          <tr>
+            <td><%= drink_record.id %></td>
+            <td><%= drink_record.drink.name %></td>
+            <td><%= drink_record.consumed_ml %>ml</td>
+            <td><%= drink_record.consumed_at.strftime("%Y/%m/%d %H:%M") %></td>
+            <td><%= drink_record.user.name.presence || "-" %></td>
+            <td><%= drink_record.user.email %></td>
+            <td><%= drink_record.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
