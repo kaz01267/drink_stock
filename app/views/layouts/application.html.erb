@@ -50,6 +50,11 @@
             <%= link_to "お酒ログ", drink_logs_path, class: "nav__link" %>
             <%= link_to "使い方", guide_path, class: "nav__link" %>
             <%= link_to "アカウント", account_path, class: "nav__link" %>
+
+            <% if current_user.admin? %>
+              <%= link_to "管理者画面", admin_root_path, class: "nav__link" %>
+            <% end %>
+
             <%= link_to "ログアウト",
                                    destroy_user_session_path,
                                    data: { turbo_method: :delete },
