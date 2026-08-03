@@ -27,4 +27,18 @@ class Admin::DrinksControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test "admin can search drinks by name" do
+    user = users(:one)
+    user.update!(admin: true)
+
+    sign_in user
+
+    drink = drinks(:one)
+
+    get admin_drinks_url, params: { q: drink.name }
+
+    assert_response :success
+    assert_includes response.body, drink.name
+  end
 end
