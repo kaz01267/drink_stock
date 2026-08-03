@@ -6,6 +6,12 @@
 
   <%= link_to "管理者画面へ戻る", admin_root_path, class: "admin-back-link" %>
 
+  <%= form_with url: admin_users_path, method: :get, local: true, class: "admin-search-form" do |form| %>
+    <%= form.text_field :q, value: params[:q], placeholder: "名前・メールアドレスで検索", class: "admin-search-input" %>
+    <%= form.submit "検索", class: "admin-search-button" %>
+    <%= link_to "リセット", admin_users_path, class: "admin-search-reset" %>
+  <% end %>
+
   <div class="admin-table-wrapper">
     <table class="admin-table">
       <thead>

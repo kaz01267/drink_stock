@@ -27,4 +27,16 @@ class Admin::UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test "admin can search users by email" do
+    user = users(:one)
+    user.update!(admin: true)
+
+    sign_in user
+
+    get admin_users_url, params: { q: user.email }
+
+    assert_response :success
+    assert_includes response.body, user.email
+  end
 end
