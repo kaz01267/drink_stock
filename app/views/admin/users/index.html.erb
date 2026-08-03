@@ -1,0 +1,31 @@
+<h1>ユーザー一覧</h1>
+
+<p><%= link_to "管理者画面へ戻る", admin_root_path %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>名前</th>
+      <th>メールアドレス</th>
+      <th>管理者</th>
+      <th>飲酒記録リマインド</th>
+      <th>おすすめメール</th>
+      <th>登録日時</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name.presence || "-" %></td>
+        <td><%= user.email %></td>
+        <td><%= user.admin? ? "はい" : "いいえ" %></td>
+        <td><%= user.drinking_reminder_email_enabled? ? "ON" : "OFF" %></td>
+        <td><%= user.recommended_drink_email_enabled? ? "ON" : "OFF" %></td>
+        <td><%= user.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
