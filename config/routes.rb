@@ -37,5 +37,6 @@ Rails.application.routes.draw do
     resources :users, only: [ :index ]
     resources :drinks, only: [ :index ]
     resources :drink_records, only: [ :index ]
+    resources :drink_logs, only: [ :index ]
   end
 end
