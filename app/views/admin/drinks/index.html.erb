@@ -1,0 +1,29 @@
+<h1>在庫一覧</h1>
+
+<p><%= link_to "管理者画面へ戻る", admin_root_path %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>お酒名</th>
+      <th>在庫量</th>
+      <th>ユーザー名</th>
+      <th>メールアドレス</th>
+      <th>登録日時</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @drinks.each do |drink| %>
+      <tr>
+        <td><%= drink.id %></td>
+        <td><%= drink.name %></td>
+        <td><%= drink.stock_ml %>ml</td>
+        <td><%= drink.user.name.presence || "-" %></td>
+        <td><%= drink.user.email %></td>
+        <td><%= drink.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
