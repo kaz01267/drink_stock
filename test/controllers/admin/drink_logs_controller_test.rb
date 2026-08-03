@@ -27,4 +27,18 @@ class Admin::DrinkLogsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test "admin can search drink logs by memo" do
+    user = users(:one)
+    user.update!(admin: true)
+
+    sign_in user
+
+    drink_log = drink_logs(:one)
+
+    get admin_drink_logs_url, params: { q: drink_log.memo }
+
+    assert_response :success
+    assert_includes response.body, drink_log.memo
+  end
 end
