@@ -36,5 +36,6 @@ Rails.application.routes.draw do
     root "dashboard#index"
     resources :users, only: [ :index ]
     resources :drinks, only: [ :index ]
+    resources :drink_records, only: [ :index ]
   end
 end
