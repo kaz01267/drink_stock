@@ -78,11 +78,11 @@ Rails.application.configure do
   # caching is enabled.
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = {
-    host: "drink-stock.onrender.com",
+    host: "drink-stock.com",
     protocol: "https"
   }
   config.action_controller.default_url_options = {
-  host: "drink-stock.onrender.com",
+  host: "drink-stock.com",
   protocol: "https"
   }
   config.action_mailer.delivery_method = :smtp
