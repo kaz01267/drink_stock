@@ -49,6 +49,7 @@ ja:
     not_saved: "%{count}件のエラーにより保存できませんでした。"
     messages:
       blank: "を入力してください"
+      inclusion: "は一覧にありません"
       not_a_number: "は数値で入力してください"
       greater_than: "%{count}より大きい値にしてください"
       greater_than_or_equal_to: "%{count}以上の値にしてください"

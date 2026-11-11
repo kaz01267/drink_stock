@@ -36,3 +36,6 @@
 
 # Ignore SimpleCov coverage reports.
 /coverage/
+
+# macOS
+.DS_Store
