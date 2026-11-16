@@ -44,7 +44,7 @@ class DrinkRecordsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 300, @drink.reload.stock_ml
   end
 
-  
+
   test "should destroy drink_record and restore stock" do
     drink_record = @user.drink_records.create!(
       drink: @drink,
@@ -72,7 +72,7 @@ class DrinkRecordsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_equal 500, @drink.reload.stock_ml
   end
-  
+
   test "should not update drink_record when consumed amount exceeds stock" do
     drink_record = @user.drink_records.create!(
       drink: @drink,
