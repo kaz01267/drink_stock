@@ -39,6 +39,8 @@ ja:
         consumed_ml: 飲んだ量(ml)
         consumed_at: 飲んだ日時
     errors:
+      messages:
+        record_invalid: "保存できませんでした: %{errors}"
       models:
         user:
           attributes:

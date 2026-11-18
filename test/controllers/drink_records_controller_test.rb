@@ -44,6 +44,7 @@ class DrinkRecordsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 300, @drink.reload.stock_ml
   end
 
+
   test "should destroy drink_record and restore stock" do
     drink_record = @user.drink_records.create!(
       drink: @drink,
@@ -59,5 +60,37 @@ class DrinkRecordsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :redirect
     assert_equal 500, @drink.reload.stock_ml
+  end
+
+  test "should not create drink_record when consumed amount exceeds stock" do
+    assert_no_difference("DrinkRecord.count") do
+      post drink_drink_records_url(@drink), params: {
+        drink_record: { consumed_ml: 600, consumed_at: Time.current }
+      }
+    end
+
+    assert_response :unprocessable_entity
+    assert_equal 500, @drink.reload.stock_ml
+  end
+
+  test "should not update drink_record when consumed amount exceeds stock" do
+    drink_record = @user.drink_records.create!(
+      drink: @drink,
+      consumed_ml: 100,
+      consumed_at: Time.current
+    )
+
+    @drink.update!(stock_ml: 400)
+
+    patch drink_drink_record_url(@drink, drink_record), params: {
+      drink_record: {
+        consumed_ml: 600,
+        consumed_at: drink_record.consumed_at
+      }
+    }
+
+    assert_response :unprocessable_entity
+    assert_equal 100, drink_record.reload.consumed_ml
+    assert_equal 400, @drink.reload.stock_ml
   end
 end
